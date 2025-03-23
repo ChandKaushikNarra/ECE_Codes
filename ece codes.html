@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ECE Codes</title>
+    <link rel="stylesheet" href="ececodes.css">
+</head>
+<body>
+    <h1><u>ECE Codes</u></h1>
+    <h2>1. AND Gate</h2>
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module andgate(a,b,y);
+            input a,b;
+            output y;
+            assign y=a&b;
+            endmodule;
+        </code>    
+    </pre>
+    <hr>
+    <h2>2. OR Gate</h2>
+    <h3>Source Code:</h3>
+    <pre>
+        <code>    
+            module orgate(a,b,y);
+            input a,b;
+            output y;
+            assign y=a|b;
+            endmodule
+        </code>
+    </pre>
+    <hr>
+    <h2>All Gates</h2>
+    <img src="Allgates_output.jpg" alt="All Gates Output" class="pic">
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module allgates(a,b,y1,y2,y3,y4,y5,y6,y7);
+            input a,b;
+            output y1,y2,y3,y4,y5,y6,y7;
+            assign y1=a&b;
+            assign y2=a|b;
+            assign y3=~a;
+            assign y4=~(a&b);
+            assign y5=~(a|b);
+            assign y6=(a^b);
+            assign y7=~(a^b);
+            endmodule;
+        </code>
+    </pre>
+    <h3>Test Bench Code:</h3>
+    <pre>
+        <code>
+            module testbench;
+            reg a,b;
+            wire y1,y2,y3,y4,y5,y6,y7;
+            allgates uut(a,b,y1,y2,y3,y4,y5,y6,y7);
+            initial
+            begin
+            a=0;b=0;
+            #100
+            a=0;b=1;
+            #100
+            a=1;b=0;
+            #100
+            a=1;b=1;
+            #100
+            $finish;
+            end
+            endmodule;
+        </code>
+    </pre>
+    <hr>
+    <h2>Half-Adder</h2>
+    <img src="HalfAdder_Output.jpg" alt="Half-Adder Output"class="pic">
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module HalfAdder(a,b,s,c);
+            input a,b;  //input declaration
+            output s,c;  //output declaration
+            xor a1(s,a,b);  //component declaration
+            and a2(c,a,b);  //component declaration
+            endmodule
+        </code>
+    </pre>
+    <h3>Test Bench Code:</h3>
+    <pre>
+        <code>
+            module test_bench;
+            reg a,b;
+            wire s,c;
+            HalfAdder uut(a,b,s,c);
+            initial
+            begin
+            a=0;b=0;
+            #100
+            a=0;b=1;
+            #100
+            a=1;b=0;
+            #100
+            a=1;b=1;
+            #100
+            $finish;
+            end
+            endmodule
+
+
+
+
+
+        </code>
+    </pre>
+    <hr>
+    <h2>Half-Subtractor</h2>
+    <img src="HalfSubtractor_Output.jpg" alt="Half-Subtractor Output"class="pic">
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module HalfSubtractor(a,b,diff,borrow);
+            input a,b;  //input declaration
+            output diff,borrow;  //output declaration
+            xor x1(diff,a,b);    //component declaration
+            and a1(borrow,~a,b); //component declaration
+            endmodule
+        </code>
+    </pre>
+    <h3>Test Bench Code:</h3>
+    <pre>
+        <code>
+            module test_bench;
+            reg a,b;
+            wire diff,borrow;
+            HalfSubtractor uut(a,b,diff,borrow);
+            initial
+            begin
+            a=0;b=0;
+            #100
+            a=0;b=1;
+            #100
+            a=1;b=0;
+            #100
+            a=1;b=1;
+            #100
+            $finish;
+            end
+            endmodule
+            
+
+
+
+            
+        </code>
+    </pre>
+    <hr>
+    <h2>Full-Adder</h2>
+    <img src="FullAdder_Output.jpg" alt="Full-Adder Output" class="pic">
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module FullAdder(a,b,c,sum,carry);
+            input a,b,c;         //input declaration
+            output sum,carry;    //output declaration
+            wire s1,t1,t2;
+            xor x1(s1,a,b);      //component declaration
+            xor x2(sum,s1,c);    //component declaration
+            and a1(t1,a,b);      //component declaration
+            and a2(t2,s1,c);     //component declaration
+            or o1(carry,t1,t2);  //component declaration
+            endmodule
+        </code>
+    </pre>
+    <h3>Test Bench Code:</h3>
+    <pre>
+        <code>
+            module test_bench;
+            reg a,b,c;
+            wire sum,carry;
+            FullAdder uut(a,b,c,sum,carry);
+            initial
+            begin
+            a=0;b=0;c=0;
+            #100
+            a=0;b=0;c=1;
+            #100
+            a=0;b=1;c=0;
+            #100
+            a=0;b=1;c=1;
+            #100
+            a=1;b=0;c=0;
+            #100
+            a=1;b=0;c=1;
+            #100
+            a=1;b=1;c=0;
+            #100
+            a=1;b=1;c=1;
+            #100
+            $finish;
+            end
+            endmodule
+        </code>
+    </pre>
+    <hr>
+    <h2>Four-Bit-Adder</h2>
+    <img src="FourBitAdder_Output.jpg" alt="Four-Bit-Adder Output" class="pic">
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module FourBitAdder(a,b,cin,c,s);
+            input [3:0]a,b;
+            input cin;
+            output [4:1]c;
+            output [3:0]s;
+            assign s[0]=a[0]^b[0]^cin;
+            assign s[1]=a[1]^b[1]^c[1];
+            assign s[2]=a[2]^b[2]^c[2];
+            assign s[3]=a[3]^b[3]^c[3];
+            assign c[1]=(a[0]&b[0])|(b[0]&cin)|(cin&a[0]);
+            assign c[2]=(a[1]&b[1])|(b[1]&c[1])|(c[1]&a[1]);
+            assign c[3]=(a[2]&b[2])|(b[2]&c[2])|(c[2]&a[2]);
+            assign c[4]=(a[3]&b[3])|(b[3]&c[3])|(c[3]&a[3]);
+            endmodule
+        </code>
+    </pre>
+    <h3>Test Bench Code:</h3>
+    <pre>
+        <code>
+            module testbench;
+            reg [3:0]a,b;
+            reg cin;
+            wire [4:1]c;
+            wire [3:0]s;
+            FourBitAdder uut(a,b,cin,c,s);
+            initial
+            begin
+            a=4'b1001;
+            b=4'b1010;
+            cin=1;
+            #100
+            a=4'b1011;
+            b=4'b1110;
+            cin=1;
+            #100
+            a=4'b1001;
+            b=4'b1001;
+            cin=1;
+            #100
+            a=4'b1111;
+            b=4'b1110;
+            cin=1;
+            #100
+            $finish;
+            end
+            endmodule
+        </code>
+    </pre>
+    <hr>
+    <h2>Encoder</h2>
+    <img src="Encoder_Output.jpg" alt="Encoder Output" class="pic">
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module Encoder_Gatelevel(a0,a1,a2,y0,y1,y2,y3,
+                                            y4,y5,y6,y7);
+            input y0,y1,y2,y3,y4,y5,y6,y7;
+            output a0,a1,a2;
+            or o1(a0,y4,y5,y6,y7);
+            or o2(a1,y2,y3,y6,y7);
+            or o3(a2,y1,y3,y5,y7);
+            endmodule
+        </code>
+    </pre>
+    <h3>Test Bench Code:</h3>
+    <pre>
+        <code>
+            module testbench;
+            reg y0,y1,y2,y3,y4,y5,y6,y7;
+            wire a0,a1,a2;
+            Encoder_Gatelevel uut(a0,a1,a2,y0,y1,y2,y3,y4,
+                                                y5,y6,y7);
+            initial
+            begin
+            y0=0;y1=0;y2=0;y3=0;y4=0;y5=0;y6=0;y7=1;
+            #100
+            y0=0;y1=0;y2=0;y3=0;y4=0;y5=0;y6=1;y7=0;
+            #100
+            y0=0;y1=0;y2=0;y3=0;y4=0;y5=1;y6=0;y7=0;
+            #100
+            y0=0;y1=0;y2=0;y3=0;y4=1;y5=0;y6=0;y7=0;
+            #100
+            y0=0;y1=0;y2=0;y3=1;y4=0;y5=0;y6=0;y7=0;
+            #100
+            y0=0;y1=0;y2=1;y3=0;y4=0;y5=0;y6=0;y7=0;
+            #100
+            y0=0;y1=1;y2=0;y3=0;y4=0;y5=0;y6=0;y7=0;
+            #100
+            y0=1;y1=0;y2=0;y3=0;y4=0;y5=0;y6=0;y7=0;
+            #100
+            $finish;
+            end
+            endmodule
+        </code>
+    </pre>
+    <hr>
+    <h2>Decoder</h2>
+    <img src="Decoder_Output.jpg" alt="Decoder Output" class="pic">
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module decoder(y0,y1,y2,y3,y4,y5,y6,y7,a,b,c);
+            input a,b,c;
+            output y0,y1,y2,y3,y4,y5,y6,y7;
+            assign y0=(~a&~b&~c);
+            assign y1=(~a&~b&c);
+            assign y2=(~a&b&~c);
+            assign y3=(~a&b&c);
+            assign y4=(a&~b&~c);
+            assign y5=(a&~b&c);
+            assign y6=(a&b&~c);
+            assign y7=(a&b&c);
+            endmodule
+        </code>
+    </pre>
+    <h3>Test Bench Code:</h3>
+    <pre>
+        <code>
+            module testbench;
+            reg a,b,c;
+            wire y0,y1,y2,y3,y4,y5,y6,y7;
+            decoder uut(y0,y1,y2,y3,y4,y5,y6,y7,a,b,c);
+            initial
+            begin
+            a=0;b=0;c=0;
+            #100
+            a=0;b=0;c=1;
+            #100
+            a=0;b=1;c=0;
+            #100
+            a=0;b=1;c=1;
+            #100
+            a=1;b=0;c=0;
+            #100
+            a=1;b=0;c=1;
+            #100
+            a=1;b=1;c=0;
+            #100
+            a=1;b=1;c=1;
+            #100
+            $finish;
+            end
+            endmodule
+        </code>
+    </pre>
+    <hr>
+    <h2>4x1 Multiplexer</h2>
+    <img src="Mux_Output.jpg" alt="Multiplexer Output" class="pic">
+    <h3>Source Code:</h3>
+    <pre>
+        <code>
+            module Mux(Y,i0,i1,i2,i3,s0,s1);
+            input i0,i1,i2,i3,s0,s1;
+            output Y;
+            assign Y=((i0&(~s0)&(~s1))|(i1&(~s0)&s1)
+                                |(i2&s0&(~s1))|(i3&s0&s1));
+            endmodule
+        </code>
+    </pre>
+    <h3>Test Bench Code:</h3>
+    <pre>
+        <code>
+            module testbench;
+            reg i0,i1,i2,i3,s0,s1;
+            wire Y;
+            Mux uut(Y,i0,i1,i2,i3,s0,s1);
+            initial
+            begin
+            i0=1;i1=0;i2=0;i3=0;s0=0;s1=0;
+            #100
+            i0=0;i1=0;i2=1;i3=0;s0=0;s1=1;
+            #100
+            i0=0;i1=0;i2=1;i3=0;s0=1;s1=0;
+            #100
+            i0=0;i1=0;i2=1;i3=0;s0=1;s1=1;
+            #100
+            $finish;
+            end
+            endmodule
+        </code>
+    </pre>
+</body>
+</html>
